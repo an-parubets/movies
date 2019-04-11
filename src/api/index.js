@@ -1,10 +1,10 @@
 import axios from 'axios';
 import * as endpoint from './endpoints';
 
-export default {
-    getPopularMovies: async () => {
+const Movies = {
+    getPopular: async (page = 1) => {
         try {
-            const { data } = await axios.get(endpoint.GET_POPULAR_MOVIES());
+            const { data } = await axios.get(endpoint.GET_POPULAR_MOVIES(page));
 
             return data;
         } catch (error) {
@@ -20,4 +20,8 @@ export default {
             console.log(error)
         }
     }
+};
+
+export default {
+    Movies
 }

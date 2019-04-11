@@ -1,0 +1,1 @@
+export const POSTER_URL = 'http://image.tmdb.org/t/p/w500';

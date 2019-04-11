@@ -1,27 +1,37 @@
 import React from 'react';
+import { Card, Rate } from 'antd';
 import { Link } from 'react-router-dom';
 import { css } from 'aphrodite';
+import { POSTER_URL } from '../../constants';
 import { styles } from './MovieCardStyles';
 
+const { Meta } = Card;
+
 export const MovieCard = (props) => {
-    const { id, title, overview, poster_path, vote_average, release_date } = props.data;
-    const poster = `http://image.tmdb.org/t/p/w500${poster_path}`;
+    const {
+        id,
+        title,
+        poster_path,
+        vote_average,
+        release_date
+    } = props.data;
+
+    const poster = `${POSTER_URL}${poster_path}`;
 
     return (
-        <Link className={css(styles.movie)} to={`/movie/${id}`}>
-            <div className={css(styles.info)}>
-                <span>Rate: {vote_average}</span>
-                <span>{release_date}</span>
-            </div>
-            <div className={css(styles.title)}>
-                <h2>{title}</h2>
-            </div>
-            <div className={css(styles.picture)}>
-                <img className={css(styles.img)} src={poster} alt={title} />
-            </div>
-            <div className={css(styles.overview)}>
-                <span>{overview}</span>
-            </div>
+        <Link to={`/movie/${id}`}>
+            <Card hoverable cover={<Poster poster={poster} title={title} />} >
+                <Meta title={title} description={<Info average={vote_average} release={release_date} />} />
+            </Card>
         </Link>
     );
 };
+
+export const Info = ({ average, release }) => (
+    <div className={css(styles.info)}>
+        <Rate value={average / 2} disabled={true} />
+        <span>{release}</span>
+    </div>
+);
+
+export const Poster = ({ poster, title }) => <img className={css(styles.img)} src={poster} alt={title} />;

@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import loadable from '@loadable/component'
 
-import CardList from './CardList/CardList';
-import MovieDetails from './MovieDetails/MovieDetails';
+import Header from './Header/Header';
+
+const CardList = loadable(() => import('./CardList/CardList'));
+const MovieDetails = loadable(() => import('./MovieDetails/MovieDetails'));
 
 export default function App() {
     return (
-        <Router>
-            <Switch>
-                <Route exact path="/" component={CardList} />
-                <Route path='/movie/:id' component={MovieDetails} />
-            </Switch>
-        </Router>
+        <Fragment>
+            <Router>
+                <Header />
+                <Switch>
+                    <Route exact path="/" component={CardList} />
+                    <Route path='/movie/:id' component={MovieDetails} />
+                </Switch>
+            </Router>
+        </Fragment>
     )
 }

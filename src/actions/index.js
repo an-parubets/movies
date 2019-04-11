@@ -1,4 +1,4 @@
-import api from '../api';
+import API from '../api';
 import {
     FETCH_POPULAR_FILMS,
     FETCH_MOVIE_DETAILS,
@@ -6,7 +6,7 @@ import {
 
 export const getPopularMovies = (page = 1) => {
     return async function (dispatch) {
-        const data = await api.getPopularMovies(page);
+        const data = await API.Movies.getPopular(page);
 
         dispatch({
             type: FETCH_POPULAR_FILMS,
@@ -17,7 +17,7 @@ export const getPopularMovies = (page = 1) => {
 
 export const getMovieDetails = id => {
     return async function (dispatch) {
-        const data = await api.getMovieDetails(id);
+        const data = await API.Movies.getMovieDetails(id);
 
         dispatch({
             type: FETCH_MOVIE_DETAILS,
