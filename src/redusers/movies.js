@@ -1,10 +1,10 @@
 import {
-    FETCH_POPULAR_FILMS,
+    FETCH_LIST_FILMS,
 } from '../actions/types';
 
 export default (state = {}, action) => {
     switch (action.type) {
-        case FETCH_POPULAR_FILMS: {
+        case FETCH_LIST_FILMS: {
             return { ...state, ...action.payload };
         }
         default:

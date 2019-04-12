@@ -1,22 +1,36 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import loadable from '@loadable/component'
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Layout } from 'antd';
+import { StyleSheet, css } from 'aphrodite';
+
 
 import Header from './Header/Header';
+import Routes from './routes';
+import Footer from './Footer/Footer';
 
-const CardList = loadable(() => import('./CardList/CardList'));
-const MovieDetails = loadable(() => import('./MovieDetails/MovieDetails'));
+
+const styles = StyleSheet.create({
+    container: {
+        margin: '25px auto',
+        minHeight: '85vh',
+        padding: '0 50px'
+    }
+});
+
+
+const Content = () => (
+    <Layout.Content className={css(styles.container)}>
+        <Routes />
+    </Layout.Content>
+);
+
 
 export default function App() {
     return (
-        <Fragment>
-            <Router>
-                <Header />
-                <Switch>
-                    <Route exact path="/" component={CardList} />
-                    <Route path='/movie/:id' component={MovieDetails} />
-                </Switch>
-            </Router>
-        </Fragment>
+        <Router>
+            <Header />
+            <Content />
+            <Footer />
+        </Router>
     )
 }

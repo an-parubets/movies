@@ -16,11 +16,9 @@ export const MovieCard = (props) => {
         release_date
     } = props.data;
 
-    const poster = `${POSTER_URL}${poster_path}`;
-
     return (
         <Link to={`/movie/${id}`}>
-            <Card hoverable cover={<Poster poster={poster} title={title} />} >
+            <Card hoverable cover={<Poster poster_path={poster_path} title={title} />} >
                 <Meta title={title} description={<Info average={vote_average} release={release_date} />} />
             </Card>
         </Link>
@@ -34,4 +32,8 @@ export const Info = ({ average, release }) => (
     </div>
 );
 
-export const Poster = ({ poster, title }) => <img className={css(styles.img)} src={poster} alt={title} />;
+export const Poster = ({ poster_path, title }) => {
+    const poster = `${POSTER_URL}${poster_path}`;
+
+    return <img className={css(styles.img)} src={poster} alt={title} />;
+};

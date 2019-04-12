@@ -1,49 +1,53 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { css } from 'aphrodite';
-
-import { Layout, List, Icon } from 'antd';
+import React, { PureComponent, Fragment } from 'react';
+import { List, Pagination, Icon } from 'antd';
 import { MovieCard } from '../MovieCard/MovieCard';
-import { getPopularMovies } from '../../actions';
-import { styles } from './CardListStyles';
-
-const mapStateToProps = state => ({
-    movies: state.movies
-});
-
-const mapDispatchToProps = dispatch => ({
-    getPopularMovies: (page) => dispatch(getPopularMovies(page))
-});
 
 
 class CardList extends PureComponent {
+    constructor() {
+        super();
 
-    componentDidMount() {
-        this.props.getPopularMovies();
+        this.onChangePagination = this.onChangePagination.bind(this);
     }
     
     render() {
-        const moviesList = this.props.movies.results;
+        const {
+            page,
+            results,
+            total_pages,
+        } = this.props.movies;
 
-        if (!moviesList) {
+        if (!results) {
             return <Icon type="loading" />
         }
 
         return (
-            <Layout.Content className={css(styles.container)}>
+            <Fragment>
                 <List grid={{ gutter: 20, xs: 1, sm: 2, md: 4, lg: 4, xl: 4, xxl: 6 }}
-                    dataSource={moviesList}
+                    dataSource={results}
                     renderItem={item => (
                         <List.Item>
                             <MovieCard data={item} />
                         </List.Item>
                     )} />
-            </Layout.Content>
+
+                <Pagination
+                    current={page}
+                    total={total_pages}
+                    pageSize={results.length}
+                    onChange={this.onChangePagination} />
+            </Fragment>
         )
+    }
+
+    /**
+     * @param page {number}
+     * @param pageSize {number}
+     */
+    onChangePagination(page, pageSize) {
+        this.props.getPopularMovies(page);
+        this.props.history.push(`/${page}`);
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CardList);
+export default CardList
