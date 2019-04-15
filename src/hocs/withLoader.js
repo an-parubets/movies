@@ -1,21 +1,24 @@
 import React from 'react';
-import { Spin, Icon } from 'antd';
+import { isEmpty } from 'ramda';
+import { Spin } from 'antd';
+import { StyleSheet, css } from 'aphrodite';
 
-const withLoader = propName => Component => {
-    return function () {
-        if (isEmpty(propName)) return <Spin indicator={<Icon type={'loading'} style={{ fontSize: 24 }} spin />} />
 
-        return <Component { ...props } />
+const styles = StyleSheet.create({
+    loader: {
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        height: '85vh',
+        width: '100%'
     }
-};
+});
 
-const isEmpty = (prop) => {
-    return (
-        prop === null
-        || prop === undefined
-        || (Array.isArray(prop) && prop.lengh === 0)
-        || (prop.constructor === Object && Object.keys(prop).length === 0)
-    )
-};
 
-export default withLoader;
+export const withLoader = Component => {
+    return (props) => (
+        isEmpty(props)
+            ? <Spin className={css(styles.loader)} type='loading' size='large' />
+            : <Component { ...props } />
+        )
+};

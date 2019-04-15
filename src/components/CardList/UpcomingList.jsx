@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { cardListWithCategory } from '../../hocs/cardListWithCategory';
-import { withLoader } from '../../hocs/withLoader';
 import { Movies } from '../../actions';
 import CardList from './CardList';
 
@@ -11,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getList: page => dispatch(Movies.getPopularMovies(page)),
+    getList: page => dispatch(Movies.getUpcomingMovies(page)),
     clear: () => dispatch(Movies.clear())
 });
 

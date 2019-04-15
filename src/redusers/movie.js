@@ -1,7 +1,6 @@
 import {
     FETCH_MOVIE_DETAILS,
-    FETCH_SIMILAR_FILMS,
-    CLEAR_MOVIE_DETAILS
+    FETCH_SIMILAR_FILMS
 } from '../actions/types';
 
 
@@ -36,9 +35,6 @@ export default (state = initialState, action) => {
                     ...action.payload
                 }
             }
-        }
-        case CLEAR_MOVIE_DETAILS: {
-            return { }
         }
         default:
             return state

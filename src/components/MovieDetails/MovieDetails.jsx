@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Typography, Button, List, Card } from 'antd';
 import { connect } from 'react-redux';
-import { getMovieDetails, getSimilarMovies } from '../../actions';
+import { Movie } from '../../actions';
 import { Poster, Info } from '../MovieCard/MovieCard';
 
 
@@ -19,8 +19,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getMovieDetails: id => dispatch(getMovieDetails(id)),
-    getSimilar: id => dispatch(getSimilarMovies(id))
+    getMovieDetails: id => dispatch(Movie.getMovieDetails(id)),
+    getSimilar: id => dispatch(Movie.getSimilarMovies(id))
 });
 
 
@@ -49,6 +49,9 @@ class MovieDetails extends Component {
     }
 
     render() {
+        if (!Object.keys(this.props.details).length
+            || !Object.keys(this.props.similar).length) return (<div></div>);
+
         const {
             title,
             overview,
@@ -64,9 +67,6 @@ class MovieDetails extends Component {
         } = this.props.details;
 
         const { results } = this.props.similar;
-
-        if (!Object.keys(this.props.details).length
-            || !Object.keys(this.props.similar).length) return (<div></div>);
 
         return (
             <Fragment>

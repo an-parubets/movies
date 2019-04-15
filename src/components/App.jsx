@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Layout } from 'antd';
 import { StyleSheet, css } from 'aphrodite';
@@ -7,6 +7,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Header from './Header/Header';
 import Routes from './routes';
 import Footer from './Footer/Footer';
+import ScrollToTop from './shared/ScrollToTop';
 
 
 const styles = StyleSheet.create({
@@ -19,9 +20,11 @@ const styles = StyleSheet.create({
 
 
 const Content = () => (
-    <Layout.Content className={css(styles.container)}>
-        <Routes />
-    </Layout.Content>
+    <ScrollToTop>
+        <Layout.Content className={css(styles.container)}>
+            <Routes />
+        </Layout.Content>
+    </ScrollToTop>
 );
 
 

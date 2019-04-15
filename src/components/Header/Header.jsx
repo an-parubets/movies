@@ -9,9 +9,9 @@ const Header = () => {
                   mode='horizontal'
                   defaultSelectedKeys={['1']}
                   style={{ lineHeight: '64px' }}>
-                <Menu.Item key='1'><Link to={'/'}>Популярные</Link></Menu.Item>
-                <Menu.Item key='2'><Link to={'/latest'}>Новинки</Link></Menu.Item>
-                <Menu.Item key='3'><Link to={'/'}>Топ просмотров</Link></Menu.Item>
+                <Menu.Item key='1'><Link to={'/popular'}>Популярные</Link></Menu.Item>
+                <Menu.Item key='2'><Link to={'/top'}>Топ просмотров</Link></Menu.Item>
+                <Menu.Item key='3'><Link to={'/upcoming'}>Анонсы</Link></Menu.Item>
             </Menu>
         </Layout.Header>
     )

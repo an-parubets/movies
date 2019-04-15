@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getList: page => dispatch(Movies.getPopularMovies(page)),
+    getList: page => dispatch(Movies.getTopViewsMovies(page)),
     clear: () => dispatch(Movies.clear())
 });
 

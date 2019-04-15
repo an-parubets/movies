@@ -27,7 +27,7 @@ export const MovieCard = (props) => {
 
 export const Info = ({ average, release }) => (
     <div className={css(styles.info)}>
-        <Rate value={average / 2} disabled={true} />
+        <Rate allowHalf value={average / 2} disabled={true} />
         <span>{release}</span>
     </div>
 );
